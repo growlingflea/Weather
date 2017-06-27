@@ -1,0 +1,27 @@
+
+body {
+    padding-top: 50px;
+}
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+#button1{
+	background-color:#114400;
+	color: #cc99ff;
+	
+	
+}
+
+#button1Background{
+	background-color:#445522;
+}	
+	
+#button2{
+	background-color:#445522;
+}
+
+.parent{
+  text-align:center
+}
