@@ -12,13 +12,13 @@
     <title>What Should I Drink</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../public/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../dist/starter-template.css" rel="stylesheet">
+    <link href="../public/dist/starter-template.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../dist/grid.css" rel="stylesheet">
+    <link href="../public/dist/grid.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don\'t actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
