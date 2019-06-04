@@ -1,14 +1,31 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: growlingflea
- * Date: 9/11/17
- * Time: 9:28 PM
- */
-class Controller
-{
 
+class Controller {
+
+
+
+    public function model($model){
+
+
+        require_once '../app/models/' . $model . '.php';
+
+        return new $model();
+
+
+
+    }
+
+
+
+    public function view($url, $data = []) {
+
+
+        require_once '../app/views/' .$url. '.php';
+
+
+
+    }
 
 
 

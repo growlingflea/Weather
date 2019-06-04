@@ -1,47 +1,86 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: growlingflea
- * Date: 9/11/17
- * Time: 9:28 PM
- */
+
 class App
 {
 
+
     protected $defaultMethod = "index";
+
     protected $defaultController = "Home";
+
     protected $parameters = [];
 
 
-    private $ctrl_str = '../app/controllers/';
-
     public function __construct()
     {
-        $url = $this->processURL();
-        $destination = $this->ctrl_str.$url[0].".php";
 
-        if(file_exists($destination)){
-            $this ->defaultController = $url[0];
+        $url = $this->processUrl();
+
+        $url[0] = ucfirst($url[0]);
+        if(file_exists('../app/controllers/' .$url[0]. '.php')) {
+
+            $this->defaultController = $url[0];
             unset($url[0]);
+
         }
 
 
-        require_once($this->ctrl_str.$this->defaultController.'.php');
+        require_once('../app/controllers/' .$this->defaultController. '.php');
+
+        $this->defaultController = new $this->defaultController;
+
+
+
+            if(isset($url[1])){
+
+
+                if(method_exists($this->defaultController, $url[1])){
+
+
+                    $this->defaultMethod = $url[1];
+                    unset($url[1]);
+
+                }
+
+
+
+
+            }
+
+
+
+
+
+        $this->parameters = $url ? array_values($url) : [];
+
+
+        call_user_func_array([$this->defaultController, $this->defaultMethod], $this->parameters);
+
+
+
+
     }
 
+    public function processUrl(){
 
-
-
-
-    public function processURL(){
 
         if(isset($_GET['url'])) {
 
-            return $url = explode('/'.filter_var(rtrim( $_GET['url'] , '/'), FILTER_SANITIZE_URL));
+
+            return $url = explode('/',filter_var(rtrim($_GET['url'],'/'), FILTER_SANITIZE_URL));
+
+
+
+
         }
 
+
+
+
     }
+
+
 
 
 }

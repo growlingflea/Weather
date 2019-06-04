@@ -3,8 +3,8 @@
 # Copy the new openemr version to the web directory 
 # does not touch sites, globals.php or database
 
-GITDIR=/home/growlingflea/git/growlingfleaSoftware
-SITEDIR=/var/www/html/___webDesign/growlingfleaSoftware.dev
+GITDIR=/home/growlingflea/git/growlingflea
+SITEDIR=/var/www/html/growlingflea.com
 
 USRGRP=www-data
 

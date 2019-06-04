@@ -36,8 +36,8 @@
 
                     $json_string = $request->getWeather("conditions", 'q', $locale);
                     $parsed_json = json_decode($json_string);
-                    $location = $parsed_json->{'current_observation'}->{'display_location'}->{'full'};
-                    $temp_f = $parsed_json->{'current_observation'}->{'temp_f'};
+                    $location = $request->getCity($parsed_json);
+                    $temp_f = $request->getTempF($parsed_json);
                     echo "Current temperature in $location is: $temp_f\n";
 
                     //make sure that there are no SOAP failures
@@ -48,7 +48,7 @@
 
                     } else if ($location) { //Check to see if there is a location.  If there isn't a location, there must be an issue.
 
-                        echo "<h3>Hello $response->Location</h3><br>";
+                        echo "<h3>Hello $location </h3><br>";
 
                         echo "The Temperature is <b>" . $temp_f . "</b>";
 
