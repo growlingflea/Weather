@@ -19,25 +19,24 @@
                 </table>
                 <?php
 
-                if($_GET['city'] && $_GET['state']){
+                if(!empty($_GET['city']) || !empty($_GET['state']) || !empty($_GET['zip'])){
 
-                    $locale = $_GET['state']."/".$_GET['city'];
+                    $locale = 1;
 
-                }else if (isset($_GET['zip'])){
+                }else{
 
-                    $locale = $_GET['zip'];
-                } else {
-
-                    $locale = false;
+                    $locale = 0;
                 }
 
                 if($locale) {
                     $request = new Request();
 
-                    $json_string = $request->getWeather("conditions", 'q', $locale);
+                    $json_string = $request->getWeather("conditions", 'q', $_GET);
                     $parsed_json = json_decode($json_string);
                     $location = $request->getCity($parsed_json);
                     $temp_f = $request->getTempF($parsed_json);
+                    $wind = $request ->getWind($parsed_json);
+
                     echo "Current temperature in $location is: $temp_f\n";
 
                     //make sure that there are no SOAP failures
@@ -52,7 +51,7 @@
 
                         echo "The Temperature is <b>" . $temp_f . "</b>";
 
-                        echo "<br><br>";
+                        echo " ";
                         switch ($temp_f) {
                             case($temp_f > 90):
                                 echo "Whoa tiger, I see iced Rum drinks and nakedness in your future!";
@@ -69,12 +68,28 @@
                                 echo "don't freeze your ass off, two bottles of Vodka and a hottub";
                         }
 
+
+                        echo "<br><br>The Wind is <b>$wind</b> knots.";
+                        switch ($wind) {
+                            case($wind <= 3):
+                                echo " Probably not the best wind for sailing unless you like paddling";
+                                break;
+
+                            case($wind > 20):
+                                echo " HOLD ON to you fuckin hat captain!!!";
+                                break;
+                             }
+
+
+
+
+
                         //The Location isn't valid.  We will list the locations that match most of the entry.
                         //If there isn't a match afterwards we can display an error
                         //todo: we can make this international
                     } else if (0) {
 
-                        $xml = $soapclient->getCitiesByCountry("United States");
+
 
 
                     }

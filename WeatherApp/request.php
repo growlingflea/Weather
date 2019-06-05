@@ -48,10 +48,29 @@ Class Request{
 
     public function getWeather($features = "conditions",  $q = 'q', $query = "OR/Portland" ){
 
-        //$link = "http://api.wunderground.com/api/$this->key/$features/$q/$query.json";
-        $link = "http://api.openweathermap.org/data/2.5/weather?zip=$query,us&APPID=$this->key";
-        $json_string = file_get_contents($link);
-        return $json_string;
+        if(!empty($query['zip'])){
+
+            $link = "http://api.openweathermap.org/data/2.5/weather?zip=$query[zip],us&APPID=$this->key";
+            $json_string = file_get_contents($link);
+            return $json_string;
+
+        }
+
+        if(!empty($query['city']) && !empty($query['state'])){
+
+            $link = "http://api.openweathermap.org/data/2.5/weather?q=$query[city],$query[state],us&APPID=$this->key";
+            $json_string = file_get_contents($link);
+            return $json_string;
+
+
+        }
+
+        if(!empty($query['city'])) {
+
+            $link = "http://api.openweathermap.org/data/2.5/weather?q=$query[city],us&APPID=$this->key";
+            $json_string = file_get_contents($link);
+            return $json_string;
+        }
 
     }
 
@@ -76,7 +95,12 @@ Class Request{
         return ceil($c);
     }
 
+    public function getWind($json_string){
 
+        $wind = $json_string->wind->speed;
+
+        return $wind;
+    }
 
 
 
