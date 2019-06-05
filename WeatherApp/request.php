@@ -36,6 +36,8 @@ Class Request{
     public function get_weather_by_city($city){
 
 
+
+
     }
 
     public function get_state_by_city($city){
