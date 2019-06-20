@@ -37,6 +37,7 @@
                     $temp_f = $request->getTempF($parsed_json);
                     $wind = $request ->getWind($parsed_json);
 
+
                     echo "Current temperature in $location is: $temp_f\n";
 
                     //make sure that there are no SOAP failures
@@ -75,7 +76,7 @@
                                 echo " Probably not the best wind for sailing unless you like paddling";
                                 break;
 
-                            case($wind > 20):
+                            case($wind > 10):
                                 echo " HOLD ON to you fuckin hat captain!!!";
                                 break;
                              }
@@ -100,4 +101,8 @@
                 }
 
 
+
+
+
                 ?>
+
